@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hope, Glory and the Terraces</title>
+<meta name="description" content="The BBC Proms, the Last Night, the national anthems of the United Kingdom and the songs of its stadiums.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Libre+Franklin:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: a concert programme — one reading column, media allowed to run wider, sections as "parts" of the evening. */
+:root{
+  --ink:#16213d;        /* programme navy */
+  --paper:#f5f6fa;      /* cool stone */
+  --card:#ffffff;
+  --muted:#5a6280;
+  --rule:#d9dce8;
+  --velvet:#a3172c;     /* Albert Hall seat velvet */
+  --brass:#a77a1f;      /* organ pipes */
+  --chip:#e8eaf3;
+  --good:#1f7a4d; --good-bg:#e4f3eb; --bad:#a3172c; --bad-bg:#f8e6e9;
+  --display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body:"Libre Franklin", "Franklin Gothic Book", "Helvetica Neue", Arial, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7e9f3; --paper:#0f1424; --card:#171e33; --muted:#a3aac4; --rule:#2a3350;
+    --velvet:#e0566a; --brass:#d8ad55; --chip:#222a44;
+    --good:#5fcf95; --good-bg:#15321f; --bad:#ef7a8b; --bad-bg:#3a1820; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#e7e9f3; --paper:#0f1424; --card:#171e33; --muted:#a3aac4; --rule:#2a3350;
+  --velvet:#e0566a; --brass:#d8ad55; --chip:#222a44;
+    --good:#5fcf95; --good-bg:#15321f; --bad:#ef7a8b; --bad-bg:#3a1820; color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--velvet);text-underline-offset:.18em}
+a:focus-visible,button:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:68rem;margin:0 auto;padding-inline:clamp(1rem,4vw,2.5rem)}
+.prose{max-width:40rem}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,5vw,3.2rem)}
+h3{font-size:clamp(1.35rem,2.6vw,1.75rem);font-weight:500}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:1.1rem}
+.label{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+
+/* Top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;gap:1.5rem;min-height:3.5rem}
+.brand{font-family:var(--display);font-weight:700;font-size:1.05rem;white-space:nowrap;color:var(--ink);text-decoration:none}
+.bar nav{display:flex;gap:1.25rem;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{white-space:nowrap;color:var(--muted);text-decoration:none;font-size:.875rem;font-weight:600;padding-block:.4rem}
+.bar nav a:hover{color:var(--velvet)}
+@media (max-width:640px){.brand{display:none}}
+
+/* Hero */
+.hero{padding-block:clamp(2.5rem,7vw,5rem) clamp(2rem,5vw,3.5rem)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center}
+.hero h1{font-size:clamp(2.6rem,7.5vw,5.4rem);letter-spacing:-.01em}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--velvet)}
+.hero .lede{font-size:1.15rem;color:var(--muted);max-width:34rem}
+.dates{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;font-variant-numeric:tabular-nums;border-top:2px solid var(--ink);padding-top:.9rem;margin-top:.4rem}
+.dates div{display:flex;flex-direction:column}
+.dates b{font-family:var(--display);font-size:1.5rem;font-weight:700}
+.dates span{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr}}
+
+/* Tricolour rule */
+.tri{height:6px;background:linear-gradient(90deg,var(--velvet) 0 33.3%,var(--paper) 33.3% 66.6%,var(--ink) 66.6%);border-block:1px solid var(--rule)}
+
+/* Sections */
+section.part{padding-block:clamp(3rem,8vw,5.5rem);border-bottom:1px solid var(--rule)}
+.part-head{display:grid;grid-template-columns:auto 1fr;gap:.25rem 1.25rem;align-items:end;margin-bottom:2rem}
+.part-no{font-family:var(--display);font-style:italic;font-size:clamp(3rem,9vw,5.5rem);line-height:.8;color:var(--velvet)}
+.part-head .label{grid-column:2}
+.part-head h2{grid-column:2}
+
+/* Figures */
+figure{margin:0}
+.fig img{width:100%;height:auto;border-radius:6px;background:var(--chip);aspect-ratio:3/2;object-fit:cover}
+.fig.portrait img{aspect-ratio:4/5;object-position:top}
+figcaption{font-size:.8125rem;color:var(--muted);margin-top:.5rem;line-height:1.45}
+figcaption a{color:var(--muted)}
+.fig .fallback{display:none}
+.fig.broken img{display:none}
+.fig.broken .fallback{display:flex}
+.fallback,.linkpanel{flex-direction:column;justify-content:flex-end;gap:.35rem;min-height:11rem;padding:1.25rem;border-radius:6px;background:var(--card);border:1px dashed var(--rule);text-decoration:none;color:var(--ink)}
+.linkpanel{display:flex}
+.linkpanel b{font-family:var(--display);font-size:1.25rem;font-weight:700}
+.linkpanel span{font-size:.875rem;color:var(--muted)}
+.linkpanel .go{color:var(--velvet);font-weight:600;font-size:.875rem}
+.linkpanel:hover{border-color:var(--velvet)}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1.75rem 2.5rem;margin-top:2.5rem}
+.fact{display:flex;flex-direction:column;gap:.7rem;min-width:0}
+.fact h3{font-size:1.3rem}
+.fact p{font-size:.98rem}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:start}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* Timeline */
+.timeline{list-style:none;margin:2.5rem 0 0;padding:0;display:flex;flex-direction:column;gap:3.5rem}
+.milestone{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:1.5rem}
+.year{font-family:var(--display);font-weight:700;font-size:1.6rem;line-height:1.1;font-variant-numeric:tabular-nums;border-top:2px solid var(--velvet);padding-top:.5rem;color:var(--velvet)}
+.year small{display:block;font-family:var(--body);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:.3rem}
+.milestone .body{display:flex;flex-direction:column;gap:1.1rem;min-width:0;border-top:1px solid var(--rule);padding-top:.6rem}
+@media (max-width:640px){.milestone{grid-template-columns:1fr;gap:.5rem}.milestone .body{border-top:0;padding-top:0}}
+
+/* Running order (programme) */
+.halves{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.half{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:1rem 1.15rem}
+.half b{display:block;font-family:var(--display);font-size:1.15rem}
+.half p{font-size:.95rem;color:var(--muted)}
+@media (max-width:560px){.halves{grid-template-columns:1fr}}
+.programme{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2rem;counter-reset:prog}
+.programme > li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1.25rem 2rem;align-items:center;padding-top:1.25rem;border-top:1px solid var(--rule)}
+.programme .work{display:flex;gap:1rem}
+.programme .work::before{counter-increment:prog;content:counter(prog);font-family:var(--display);font-style:italic;font-size:2.2rem;line-height:1;color:var(--brass);min-width:1.5rem}
+.programme .work b{font-family:var(--display);font-size:1.3rem;display:block;line-height:1.2}
+.programme .work span{color:var(--muted);font-size:.95rem}
+@media (max-width:700px){.programme > li{grid-template-columns:1fr}}
+
+/* Video */
+.video{display:flex;flex-direction:column;gap:.5rem;min-width:0}
+.vframe{position:relative;aspect-ratio:16/9;width:100%;max-width:100%;border-radius:6px;overflow:hidden;background:linear-gradient(135deg,#16213d,#3a1520)}
+.vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vbtn{position:absolute;inset:0;display:block;color:#fff;text-decoration:none}
+.vbtn .vtitle{position:absolute;left:1rem;right:1rem;top:1rem;font-family:var(--display);font-size:1.05rem;line-height:1.25;color:#fff}
+.vbtn img{position:absolute;inset:0}
+.vbtn .yt{position:absolute;right:.6rem;bottom:.6rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(0,0,0,.65);color:#fff;padding:.3rem .55rem;border-radius:3px}
+.vbtn img{width:100%;height:100%;object-fit:cover;opacity:.9;transition:opacity .2s}
+@media (prefers-reduced-motion: reduce){.vbtn img{transition:none}}
+.vbtn:hover img{opacity:1}
+.vbtn .play{position:absolute;left:50%;top:50%;width:4rem;height:4rem;margin:-2rem 0 0 -2rem;border-radius:50%;background:var(--velvet);display:grid;place-items:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.vbtn .play::after{content:"";border-style:solid;border-width:.7rem 0 .7rem 1.15rem;border-color:transparent transparent transparent #fff;margin-left:.25rem}
+.vbtn:focus-visible{outline:3px solid var(--brass);outline-offset:-3px}
+.video .vcap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;font-size:.8125rem;color:var(--muted);line-height:1.4}
+.video .vcap a{color:var(--muted);white-space:nowrap}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,18rem),1fr));gap:1.5rem}
+
+/* Nations */
+.nations{display:flex;flex-direction:column;gap:0}
+.nation{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:1.5rem 2.5rem;padding-block:2.25rem;border-top:1px solid var(--rule)}
+.nation:first-child{border-top:2px solid var(--ink)}
+.nation-name{display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
+.nation-name h3{font-size:1.6rem;font-weight:700}
+.chip{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .55rem;border-radius:3px;background:var(--chip);color:var(--ink)}
+.chip.official{background:var(--ink);color:var(--paper)}
+.chip.contested{background:transparent;border:1px solid var(--velvet);color:var(--velvet)}
+.anthem{font-family:var(--display);font-style:italic;font-size:1.1rem;color:var(--muted);line-height:1.3}
+.nation .body{display:flex;flex-direction:column;gap:1.25rem;min-width:0}
+.aside-note{border-left:3px solid var(--velvet);padding:.25rem 0 .25rem 1rem;display:flex;flex-direction:column;gap:.4rem}
+.aside-note b{font-family:var(--display);font-size:1.15rem}
+@media (max-width:760px){.nation{grid-template-columns:1fr}}
+
+/* Chants */
+.group{margin-top:3rem;display:flex;flex-direction:column;gap:1.5rem}
+.group > h3{font-weight:700;display:flex;align-items:baseline;gap:.75rem;border-bottom:2px solid var(--ink);padding-bottom:.5rem}
+.group > h3 small{font-family:var(--body);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.song{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:1.25rem 2rem;padding-bottom:1.75rem;border-bottom:1px solid var(--rule)}
+.song:last-child{border-bottom:0}
+.song .txt{display:flex;flex-direction:column;gap:.55rem}
+.song .txt h4{margin:0;font-family:var(--display);font-size:1.35rem;font-weight:700;line-height:1.2}
+.song .txt .ctx{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
+.song .txt p{font-size:.98rem}
+.song .media{display:flex;flex-direction:column;gap:1.25rem;min-width:0}
+@media (max-width:760px){.song{grid-template-columns:1fr}}
+
+/* ---- Quiz: closing call to action ---- */
+.quiz-cta{padding-block:clamp(3rem,8vw,5rem)}
+.quiz-cta .inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.5rem 3rem;align-items:end;border-top:2px solid var(--ink);padding-top:2rem}
+.quiz-cta h2{font-size:clamp(2rem,5vw,3rem)}
+.quiz-cta p{color:var(--muted);max-width:36rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;border:0;border-radius:6px;padding:.8rem 1.5rem;font:inherit;font-weight:700;cursor:pointer;background:var(--velvet);color:#fff;text-decoration:none;line-height:1.3}
+.btn:hover{filter:brightness(1.08)}
+.btn.dark{background:var(--ink);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.btn:disabled{opacity:.4;cursor:default;filter:none}
+@media (max-width:640px){.quiz-cta .inner{grid-template-columns:1fr}}
+
+/* ---- Quiz panel ---- */
+#quiz-app{position:fixed;inset:0;z-index:50;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body.quiz-open{overflow:hidden}
+#quiz-app[hidden],#quiz-app [hidden]{display:none!important}
+#quiz-app .qbar{position:sticky;top:0;z-index:2;background:var(--paper);border-bottom:1px solid var(--rule)}
+#quiz-app .qbar .in{max-width:44rem;margin:0 auto;padding-inline:clamp(1rem,4vw,2rem);min-height:3.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+#quiz-app .qbar .back{all:unset;cursor:pointer;font-weight:600;font-size:.9rem;color:var(--muted);padding-block:.4rem}
+#quiz-app .qbar .back:hover{color:var(--velvet)}
+#quiz-app .qbar .back:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:4px}
+#quiz-app .qmain{max-width:44rem;margin:0 auto;padding-inline:clamp(1rem,4vw,2rem);padding-block:clamp(1.5rem,5vw,3rem);display:flex;flex-direction:column;gap:1.5rem}
+#quiz-app h2{font-size:clamp(1.35rem,3.6vw,1.75rem)}
+#quiz-app .qtitle{font-size:clamp(2rem,6vw,3rem)}
+#quiz-app .qtitle em{font-style:italic;font-weight:500;color:var(--velvet)}
+#quiz-app .muted{color:var(--muted)}
+#quiz-app .note{border-left:3px solid var(--brass);padding:.15rem 0 .15rem .9rem;font-size:.92rem}
+#quiz-app .progress{display:flex;align-items:center;gap:1rem;font-variant-numeric:tabular-nums;font-size:.875rem;color:var(--muted)}
+#quiz-app .track{flex:1;height:6px;border-radius:3px;background:var(--chip);overflow:hidden}
+#quiz-app .fill{height:100%;background:var(--velvet);width:0;transition:width .25s}
+@media (prefers-reduced-motion: reduce){#quiz-app .fill{transition:none}}
+#quiz-app .card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:clamp(1.25rem,4vw,2rem);display:flex;flex-direction:column;gap:1.25rem}
+#quiz-app .card.warn{border-color:var(--velvet)}
+#quiz-app .qhead{display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:baseline}
+#quiz-app .qno{font-family:var(--display);font-style:italic;font-size:2.4rem;line-height:1;color:var(--velvet)}
+#quiz-app .options{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+#quiz-app .opt{width:100%;text-align:left;display:flex;gap:.85rem;align-items:flex-start;padding:.8rem 1rem;border:1px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink);cursor:pointer;line-height:1.4;font:inherit}
+#quiz-app .opt:hover:not(:disabled){border-color:var(--velvet)}
+#quiz-app .opt .key{flex:none;width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700;background:var(--chip);color:var(--ink)}
+#quiz-app .opt:disabled{cursor:default}
+#quiz-app .opt.correct{border-color:var(--good);background:var(--good-bg)}
+#quiz-app .opt.correct .key{background:var(--good);color:var(--card)}
+#quiz-app .opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+#quiz-app .opt.wrong .key{background:var(--bad);color:var(--card)}
+#quiz-app .opt.dim{opacity:.55}
+#quiz-app .feedback{border-left:3px solid var(--good);padding:.2rem 0 .2rem 1rem;display:flex;flex-direction:column;gap:.35rem}
+#quiz-app .feedback.bad{border-color:var(--bad)}
+#quiz-app .feedback b{font-family:var(--display);font-size:1.15rem}
+#quiz-app .actions{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:flex-end}
+#quiz-app .field{display:flex;flex-direction:column;gap:.35rem}
+#quiz-app .field label{font-weight:600;font-size:.95rem}
+#quiz-app .field input{font:inherit;padding:.7rem .85rem;border:1px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink);width:100%}
+#quiz-app .err{color:var(--bad);font-size:.875rem;min-height:1.2em}
+#quiz-app .who{font-size:.9rem;color:var(--muted)}
+#quiz-app .status{font-size:.9rem;padding:.6rem .85rem;border-radius:6px;background:var(--chip)}
+#quiz-app .status.ok{background:var(--good-bg);color:var(--good)}
+#quiz-app .status.bad{background:var(--bad-bg);color:var(--bad)}
+#quiz-app .score{font-family:var(--display);font-size:clamp(3.5rem,12vw,5.5rem);line-height:1;font-weight:700;color:var(--velvet);font-variant-numeric:tabular-nums}
+#quiz-app .score small{font-size:.4em;color:var(--muted);font-weight:500}
+#quiz-app .review{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+#quiz-app .review li{display:grid;grid-template-columns:1.6rem minmax(0,1fr);gap:.75rem;padding-block:.85rem;border-top:1px solid var(--rule);font-size:.95rem}
+#quiz-app .review .mark{font-weight:700}
+#quiz-app .review .ok{color:var(--good)}
+#quiz-app .review .no{color:var(--bad)}
+#quiz-app .review .ans{color:var(--muted);font-size:.875rem}
+
+footer{padding-block:3rem;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-direction:column;gap:.5rem}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Hope, Glory &amp; the Terraces</a>
+    <nav aria-label="Sections">
+      <a href="#proms">The Proms</a>
+      <a href="#last-night">The Last Night</a>
+      <a href="#anthems">National anthems</a>
+      <a href="#terraces">Stadium anthems</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div class="stack">
+      <p class="label">The United Kingdom in song</p>
+      <h1>The Proms, the anthems <em>&amp; the terraces</em></h1>
+      <p class="lede">From the flag-waving finale at the Royal Albert Hall to the hymns and pop songs roared from the stands at Twickenham, Murrayfield, Cardiff and Anfield: how Britain sings itself.</p>
+      <div class="dates">
+        <div><b>1895</b><span>First Proms season</span></div>
+        <div><b>17 Jul – 12 Sep</b><span>Proms 2026</span></div>
+        <div><b>70+</b><span>Concerts a season</span></div>
+      </div>
+    </div>
+    <figure class="fig"><img src="images/royal-albert-hall-dusk.jpg" alt="The Royal Albert Hall at dusk, its brick rotunda lit in gold under a deep blue sky" loading="lazy"><figcaption>The Royal Albert Hall, South Kensington, at dusk.</figcaption></figure>
+  </div>
+</div>
+<div class="tri" aria-hidden="true"></div>
+
+<!-- SECTION 1 -->
+<section class="part" id="proms">
+  <div class="wrap">
+    <div class="part-head">
+      <span class="part-no" aria-hidden="true">I</span>
+      <p class="label">Part one</p>
+      <h2>The BBC Proms Festival</h2>
+    </div>
+
+    <div class="split">
+      <div class="stack prose">
+        <p>The BBC Proms (official name: <strong>The Henry Wood Promenade Concerts</strong>) is an eight-week summer festival of classical music held annually in the United Kingdom.</p>
+        <p><strong>2026 season dates.</strong> The festival takes place every year from mid-July to mid-September. For the 2026 edition, it runs from 17 July to 12 September 2026.</p>
+      </div>
+      <figure class="fig"><img src="images/proms-2026-poster.jpg" alt="The BBC Proms 2026 season poster, a collage of performers on a bright blue background" loading="lazy"><figcaption>The BBC Proms 2026 season artwork. © BBC</figcaption></figure>
+    </div>
+
+    <div class="facts">
+      <div class="fact">
+        <figure class="fig"><img src="images/orchestra-on-stage.jpg" alt="An orchestra taking a bow on the stage of the Royal Albert Hall, seen from above" loading="lazy"><figcaption>An orchestra on the Proms stage, seen from the Gallery.</figcaption></figure>
+        <h3>Principal venue</h3>
+        <p>The vast majority of the more than 70 concerts are held at the Royal Albert Hall in London, alongside regional events at alternative venues like Cadogan Hall or around the country.</p>
+      </div>
+
+      <div class="fact">
+        <div class="duo"><figure class="fig portrait"><img src="images/henry-wood.jpg" alt="Portrait photograph of Sir Henry Wood" loading="lazy"><figcaption>Sir Henry Wood (1869–1944)</figcaption></figure><figure class="fig portrait"><img src="images/robert-newman.jpg" alt="Portrait photograph of Robert Newman" loading="lazy"><figcaption>Robert Newman (1858–1926)</figcaption></figure></div>
+        <h3>Origins</h3>
+        <p>Founded in 1895 by impresario Robert Newman and conductor Sir Henry Wood, the festival aimed to make classical music accessible to a wider, general audience.</p>
+      </div>
+
+      <div class="fact">
+        <figure class="fig"><img src="images/rah-seating-diagram.jpg" alt="Labelled view of the Royal Albert Hall auditorium showing the Arena, Stalls, Choir, Loggia, Grand Tier, Second Tier, Rausing Circle and Gallery" loading="lazy" style="aspect-ratio:auto;object-fit:contain"><figcaption>Where everyone sits, and stands: Promenaders fill the Arena (centre) and the Gallery (top).</figcaption></figure>
+        <figure class="fig"><img src="images/rah-gallery-view.jpg" alt="The empty auditorium of the Royal Albert Hall, with tiers of red seats and the acoustic discs under the dome" loading="lazy"><figcaption>The auditorium: the Arena at the centre, the Gallery under the dome. Full seating plan at <a href="https://www.royalalberthall.com/" target="_blank" rel="noopener">royalalberthall.com</a></figcaption></figure>
+        <h3>The “Promming” spirit</h3>
+        <p>The term “prom” derives from “promenade concert”, historically referring to concerts where audiences could walk around or stand. Today, highly affordable standing tickets (“Proms Passes” or tickets purchased on the day) allow the audience to experience the music from right up close to the stage in the central Arena or up in the Gallery.</p>
+      </div>
+
+      <div class="fact">
+        <h3>Programmatic diversity</h3>
+        <p>The festival combines major classical orchestral works with jazz, world music, contemporary classical premieres and newly commissioned works. All concerts are broadcast live and relayed by the BBC, particularly on BBC Radio&nbsp;3.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section class="part" id="last-night">
+  <div class="wrap">
+    <div class="part-head">
+      <span class="part-no" aria-hidden="true">II</span>
+      <p class="label">Part two</p>
+      <h2>The History of the Last Night of the Proms</h2>
+    </div>
+
+    <div class="split">
+      <p class="prose" style="font-size:1.15rem">The Last Night of the Proms is far more than a simple closing concert; it is a profound British cultural institution renowned worldwide for its eccentric, celebratory and patriotic atmosphere. This unique ritual was shaped by specific historical milestones.</p>
+      <figure class="fig"><img src="images/last-night-flags.jpg" alt="A packed Royal Albert Hall on the Last Night of the Proms, the Arena a sea of waving Union Jacks and other flags" loading="lazy"><figcaption>The Last Night of the Proms at the Royal Albert Hall.</figcaption></figure>
+    </div>
+
+    <ol class="timeline">
+      <!-- 1 -->
+      <li class="milestone">
+        <div class="year">1895–1939<small>Festive beginnings</small></div>
+        <div class="body">
+          <h3>Festive end-of-season beginnings</h3>
+          <p class="prose">From the festival's birth in 1895 under Robert Newman and Sir Henry Wood, the closing concert intentionally adopted a lighter mood than the rest of the season. In 1905, Sir Henry Wood composed the <em>Fantasia on British Sea Songs</em>, a suite of traditional maritime melodies, to mark the centenary of the Battle of Trafalgar. The piece was an instant hit, becoming an annual tradition and forming the bedrock of the Last Night's musical customs.</p>
+          <div class="video" style="max-width:40rem">
+            <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=0GSiTs8mB3s" target="_blank" rel="noopener" aria-label="Watch on YouTube: Fantasia on British Sea Songs, Last Night of the Proms 2017"><img src="https://i.ytimg.com/vi/0GSiTs8mB3s/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Fantasia on British Sea Songs, Last Night of the Proms 2017</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+            <div class="vcap"><span>“Saucy Arethusa” from the <em>Fantasia on British Sea Songs</em>, Last Night 2017</span><a href="https://www.youtube.com/watch?v=0GSiTs8mB3s" target="_blank" rel="noopener">YouTube ↗</a></div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 2 -->
+      <li class="milestone">
+        <div class="year">1941<small>The wartime turning point</small></div>
+        <div class="body">
+          <h3>The Second World War turning point</h3>
+          <div class="split">
+            <figure class="fig"><img src="images/st-pauls-survives.jpg" alt="The dome of St Paul's Cathedral rising out of smoke during the Blitz" loading="lazy"><figcaption><em>St Paul's Survives</em>, Herbert Mason, 29 December 1940.</figcaption></figure>
+            <p>The patriotic tone and structural format we know today were forged during the Blitz. In 1941, the festival's original venue, Queen's Hall, was completely destroyed by German bombing raids, prompting an emergency relocation to the Royal Albert Hall. That same year, Sir Henry Wood established the tradition of the conductor's closing speech to thank the audience and advocate for live music. Against the wartime backdrop, the patriotic hymns took on a profound collective emotional weight.</p>
+          </div>
+          <figure class="fig"><img src="images/queens-hall.jpg" alt="The interior of the Queen's Hall, London, with its curved balconies and organ, before its destruction in 1941" loading="lazy"><figcaption>The Queen's Hall, Langham Place, before its destruction on 10–11 May 1941.</figcaption></figure>
+        </div>
+      </li>
+
+      <!-- 3 -->
+      <li class="milestone">
+        <div class="year">1954<small>The running order fixed</small></div>
+        <div class="body">
+          <h3>The codification of traditional anthems</h3>
+          <p class="prose">The permanent structure of the concert's second half was explicitly codified in 1954, dividing the final night into two distinct portions.</p>
+          <div class="halves">
+            <div class="half"><b>First half</b><p>Remains dedicated to standard serious classical repertoire, frequently incorporating modern premieres or internationally acclaimed soloists.</p></div>
+            <div class="half"><b>Second half</b><p>The celebratory, interactive singalong, in which the audience joins in unison for a fixed sequence of patriotic favourites.</p></div>
+          </div>
+          <p class="label" style="margin-top:.5rem">The second-half running order</p>
+          <ol class="programme">
+            <li>
+              <div class="work"><div><b>Pomp and Circumstance March No.&nbsp;1</b><span>Edward Elgar, to the tune of “Land of Hope and Glory”</span></div></div>
+              <div class="video">
+                <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=Vvgl_2JRIUs" target="_blank" rel="noopener" aria-label="Watch on YouTube: Pomp and Circumstance March No. 1, Last Night 2012"><img src="https://i.ytimg.com/vi/Vvgl_2JRIUs/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Pomp and Circumstance March No. 1, Last Night 2012</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+                <div class="vcap"><span>Last Night of the Proms 2012</span><a href="https://www.youtube.com/watch?v=Vvgl_2JRIUs" target="_blank" rel="noopener">YouTube ↗</a></div>
+              </div>
+            </li>
+            <li>
+              <div class="work"><div><b>Fantasia on British Sea Songs</b><span>Henry Wood</span></div></div>
+              <div class="video">
+                <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=YUXBrek5N9g" target="_blank" rel="noopener" aria-label="Watch on YouTube: Fantasia on British Sea Songs, Last Night 2012"><img src="https://i.ytimg.com/vi/YUXBrek5N9g/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Fantasia on British Sea Songs, Last Night 2012</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+                <div class="vcap"><span>Last Night of the Proms 2012</span><a href="https://www.youtube.com/watch?v=YUXBrek5N9g" target="_blank" rel="noopener">YouTube ↗</a></div>
+              </div>
+            </li>
+            <li>
+              <div class="work"><div><b>Rule, Britannia!</b><span>Thomas Arne</span></div></div>
+              <div class="video">
+                <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=4InxNzV_Wd8" target="_blank" rel="noopener" aria-label="Watch on YouTube: Rule, Britannia!, Last Night 2024"><img src="https://i.ytimg.com/vi/4InxNzV_Wd8/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Rule, Britannia!, Last Night 2024</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+                <div class="vcap"><span>Last Night of the Proms 2024</span><a href="https://www.youtube.com/watch?v=4InxNzV_Wd8" target="_blank" rel="noopener">YouTube ↗</a></div>
+              </div>
+            </li>
+            <li>
+              <div class="work"><div><b>Jerusalem</b><span>Hubert Parry</span></div></div>
+              <div class="video">
+                <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=lOFHVXE6yWs" target="_blank" rel="noopener" aria-label="Watch on YouTube: Jerusalem, Last Night 2012"><img src="https://i.ytimg.com/vi/lOFHVXE6yWs/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Jerusalem, Last Night 2012</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+                <div class="vcap"><span>Last Night of the Proms 2012</span><a href="https://www.youtube.com/watch?v=lOFHVXE6yWs" target="_blank" rel="noopener">YouTube ↗</a></div>
+              </div>
+            </li>
+            <li>
+              <div class="work"><div><b>The National Anthem</b><span>God Save the King</span></div></div>
+              <div class="video">
+                <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=BvwRADxgz74" target="_blank" rel="noopener" aria-label="Watch on YouTube: God Save the King, Last Night 2023"><img src="https://i.ytimg.com/vi/BvwRADxgz74/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">God Save the King, Last Night 2023</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+                <div class="vcap"><span>Last Night of the Proms 2023</span><a href="https://www.youtube.com/watch?v=BvwRADxgz74" target="_blank" rel="noopener">YouTube ↗</a></div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </li>
+
+      <!-- 4 -->
+      <li class="milestone">
+        <div class="year">Folklore<small>The Promenaders</small></div>
+        <div class="body">
+          <h3>The folklore of the Promenaders</h3>
+          <p class="prose">Over the decades, the standing audience in the central Arena (known as the “Promenaders”) developed unique, humorous subcultural rituals.</p>
+          <div class="split">
+            <div class="stack">
+              <div class="duo"><figure class="fig"><img src="images/fancy-dress.jpg" alt="Performers in evening dress, top hats and feathered costumes on the red-carpeted steps of the Royal Albert Hall" loading="lazy"><figcaption>Fancy dress on the steps of the Royal Albert Hall.</figcaption></figure><figure class="fig">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Proms-albert-hall-04.jpg?width=900" alt="Promenaders with flags and hats in the Arena of the Royal Albert Hall" onerror="this.closest('figure').classList.add('broken')" loading="lazy">
+                <a class="fallback" href="https://www.bbc.co.uk/proms" target="_blank" rel="noopener"><b>The Promenaders</b><span>Photo unavailable</span></a>
+                <figcaption>Promenaders at the Royal Albert Hall. <a href="https://commons.wikimedia.org/wiki/File:Proms-albert-hall-04.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
+              </figure></div>
+              <p><strong>Fancy dress &amp; flags.</strong> Spectators arrive in extravagant costumes and eccentric hats, waving thousands of Union Jacks alongside flags from dozens of nations representing international music lovers.</p>
+            </div>
+            <div class="stack">
+              <div class="video">
+                <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=5645nGN6qSA" target="_blank" rel="noopener" aria-label="Watch on YouTube: the Hornpipe, Last Night 2012"><img src="https://i.ytimg.com/vi/5645nGN6qSA/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">the Hornpipe, Last Night 2012</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+                <div class="vcap"><span>The Hornpipe, Last Night 2012</span><a href="https://www.youtube.com/watch?v=5645nGN6qSA" target="_blank" rel="noopener">YouTube ↗</a></div>
+              </div>
+              <p><strong>The Hornpipe choreography.</strong> During the “Jack's the Lad” (Sailor's Hornpipe) segment of Henry Wood's suite, the standing audience jumps up and down in synchronised rhythm, accelerating at a frenetic pace as the orchestra builds to its rapid climax.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 5 -->
+      <li class="milestone">
+        <div class="year">1996–2013<small>Reach &amp; renewal</small></div>
+        <div class="body">
+          <h3>Global reach and modern developments</h3>
+          <div class="split">
+            <div class="stack">
+              <p>Today, the Last Night is televised live across the globe by the BBC to millions of viewers. Due to overwhelming demand for tickets, the BBC launched the <strong>Proms in the Park</strong> events in 1996, creating parallel big-screen outdoor concerts across major UK cities (such as London, Belfast, Glasgow and Cardiff) to link with the Royal Albert Hall.</p>
+              <figure class="fig"><img src="images/proms-in-the-park.jpg" alt="Spectators in bowler hats with Union Jacks watching the stage at Proms in the Park" loading="lazy"><figcaption>Proms in the Park, Hyde Park, London.</figcaption></figure>
+            </div>
+            <div class="stack">
+              <figure class="fig portrait"><img src="images/marin-alsop.jpg" alt="Portrait of the conductor Marin Alsop holding a baton" loading="lazy"><figcaption>Marin Alsop, conductor of the Last Night in 2013 and 2015.</figcaption></figure>
+              <p>The festival has also modernised its line-up; in 2013, American conductor Marin Alsop broke historical ground by becoming the first ever woman to conduct the Last Night of the Proms.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="part" id="anthems">
+  <div class="wrap">
+    <div class="part-head">
+      <span class="part-no" aria-hidden="true">III</span>
+      <p class="label">Part three</p>
+      <h2>Constitutional Status of UK National Anthems</h2>
+    </div>
+    <p class="prose" style="margin-bottom:2.5rem">Strictly speaking, within the British constitutional framework, the only official national anthem for the entirety of the United Kingdom is <em>God Save the King</em>. The four constituent nations (England, Scotland, Wales and Northern Ireland) do not possess separate home anthems universally enacted by individual national acts of parliament. Instead, sport and cultural tradition have established distinct de facto, unofficial or semi-official regional anthems.</p>
+
+    <div class="nations">
+      <!-- UK -->
+      <article class="nation">
+        <div class="nation-name">
+          <h3>The United Kingdom</h3>
+          <span class="chip official">Official, by custom</span>
+          <span class="anthem">God Save the King</span>
+        </div>
+        <div class="body">
+          <p class="prose"><em>God Save the King</em> (or Queen, depending on the reigning monarch) serves as the official national anthem, rooted in historical royal custom rather than codified statutory law. <em>Rule, Britannia!</em> and <em>Land of Hope and Glory</em> function as secondary, highly prominent unofficial patriotic anthems.</p>
+          <div class="aside-note prose">
+            <b>The Sex Pistols' “God Save the Queen” (1977)</b>
+            <p>Released in May 1977 to coincide with Elizabeth II's Silver Jubilee, the Sex Pistols' single borrowed the anthem's title to turn it against the monarchy and the national mood of celebration. Banned by the BBC and refused by most shops, it nonetheless climbed to number two in Jubilee week, behind Rod Stewart, which fuelled lasting suspicions that the chart had been quietly adjusted; the band's boat trip down the Thames on 7 June, playing the song outside Parliament, ended in arrests. The record remains the defining punk counter-anthem: a parody that confirmed, by the outrage it provoked, how sacred the original still was.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- England -->
+      <article class="nation">
+        <div class="nation-name">
+          <h3>England</h3>
+          <span class="chip">No legal anthem</span>
+          <span class="anthem">God Save the King · Jerusalem</span>
+        </div>
+        <div class="body">
+          <p class="prose">England possesses no unique legal national anthem of its own. <em>God Save the King</em> is used by default at international football and rugby fixtures.</p>
+          <p class="prose">However, <em>Jerusalem</em> (William Blake's poem set to music by Hubert Parry) is the officially designated anthem for England at the Commonwealth Games and is played at international cricket matches. <em>Land of Hope and Glory</em> was previously used for the Commonwealth Games before being succeeded by <em>Jerusalem</em>.</p>
+          <div class="split">
+            <figure class="fig portrait"><img src="images/william-blake.jpg" alt="Portrait of William Blake by Thomas Phillips, holding a pencil" loading="lazy"><figcaption>William Blake by Thomas Phillips, 1807. National Portrait Gallery, London.</figcaption></figure>
+            <figure class="fig"><img src="images/commonwealth-games-2026.jpg" alt="Performers with outstretched arms beneath a giant foil-wrapped teacake at the Commonwealth Games opening ceremony" loading="lazy"><figcaption>Opening ceremony, Glasgow 2026 Commonwealth Games.</figcaption></figure>
+          </div>
+        </div>
+      </article>
+
+      <!-- Scotland -->
+      <article class="nation">
+        <div class="nation-name">
+          <h3>Scotland</h3>
+          <span class="chip">De facto</span>
+          <span class="anthem">Flower of Scotland</span>
+        </div>
+        <div class="body">
+          <p class="prose">Scotland possesses no legally codified national anthem. <em>Flower of Scotland</em> (composed in 1967 by the folk group The Corries) has become the de facto national anthem, universally adopted by the Scottish rugby union team, the national football team and the Commonwealth Games delegation since the 1990s/2010s. Traditional historical alternatives include <em>Scotland the Brave</em> (heavily associated with bagpipes) and <em>Scots Wha Hae</em>.</p>
+          <div class="video" style="max-width:40rem">
+            <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=W8tNgAIh-TI" target="_blank" rel="noopener" aria-label="Watch on YouTube: Flower of Scotland"><img src="https://i.ytimg.com/vi/W8tNgAIh-TI/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Flower of Scotland</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+            <div class="vcap"><span><em>Flower of Scotland</em></span><a href="https://www.youtube.com/watch?v=W8tNgAIh-TI" target="_blank" rel="noopener">YouTube ↗</a></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Wales -->
+      <article class="nation">
+        <div class="nation-name">
+          <h3>Wales</h3>
+          <span class="chip">Semi-official</span>
+          <span class="anthem">Hen Wlad Fy Nhadau</span>
+        </div>
+        <div class="body">
+          <p class="prose"><em>Hen Wlad Fy Nhadau</em> (<em>Land of My Fathers</em>) enjoys stable, highly institutionalised semi-official de facto status. While lacking formal statutory legislation, it is officially recognised by the Welsh Government and the Senedd, performed at major state events before the Royal Family, and sung entirely in the Welsh language at sporting fixtures.</p>
+          <div class="stack">
+            <div class="video" style="max-width:40rem">
+              <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=aVZHklqNGoo" target="_blank" rel="noopener" aria-label="Watch on YouTube: Hen Wlad Fy Nhadau"><img src="https://i.ytimg.com/vi/aVZHklqNGoo/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Hen Wlad Fy Nhadau</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+              <div class="vcap"><span><em>Hen Wlad Fy Nhadau</em></span><a href="https://www.youtube.com/watch?v=aVZHklqNGoo" target="_blank" rel="noopener">YouTube ↗</a></div>
+            </div>
+            <div class="duo"><figure class="fig"><img src="images/senedd-chamber.jpg" alt="The circular debating chamber of the Senedd seen from the public gallery, under its funnel-shaped roof" loading="lazy"><figcaption>The Siambr, the Senedd debating chamber.</figcaption></figure><figure class="fig">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Senedd,_Welsh_parliament,_Cardiff_Bay.jpg?width=900" alt="The Senedd building in Cardiff Bay, with its glass front and timber canopy" onerror="this.closest('figure').classList.add('broken')" loading="lazy">
+              <a class="fallback" href="https://en.wikipedia.org/wiki/Senedd_building" target="_blank" rel="noopener"><b>The Senedd</b><span>Photo unavailable</span></a>
+              <figcaption>The Senedd, Cardiff Bay. <a href="https://commons.wikimedia.org/wiki/File:Senedd,_Welsh_parliament,_Cardiff_Bay.jpg" target="_blank" rel="noopener">Commons</a></figcaption>
+            </figure></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Northern Ireland -->
+      <article class="nation">
+        <div class="nation-name">
+          <h3>Northern Ireland</h3>
+          <span class="chip contested">No consensus</span>
+          <span class="anthem">Depends on the sport</span>
+        </div>
+        <div class="body">
+          <p class="prose">Owing to deeply rooted political and communal divisions, Northern Ireland has no single national anthem that commands cross-community consensus. Usage depends strictly on the governing sporting body: <em>God Save the King</em> is used at official UK state functions and by the Northern Ireland national football team.</p>
+          <p class="prose">The <em>Londonderry Air</em> (popularly sung to the lyrics of <em>Danny Boy</em>) serves as the politically neutral official anthem for the Northern Irish delegation at the Commonwealth Games. <em>Ireland's Call</em>, written in 1995 to serve as a unifying anthem, is used by sporting bodies that organise on an all-island basis, uniting the Republic of Ireland and Northern Ireland under a single banner (such as rugby union, hockey and cricket).</p>
+          <div class="video" style="max-width:40rem">
+            <div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=BbusgqRc9qg" target="_blank" rel="noopener" aria-label="Watch on YouTube: Ireland's Call"><img src="https://i.ytimg.com/vi/BbusgqRc9qg/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Ireland's Call</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div>
+            <div class="vcap"><span><em>Ireland's Call</em></span><a href="https://www.youtube.com/watch?v=BbusgqRc9qg" target="_blank" rel="noopener">YouTube ↗</a></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="part" id="terraces">
+  <div class="wrap">
+    <div class="part-head">
+      <span class="part-no" aria-hidden="true">IV</span>
+      <p class="label">Part four</p>
+      <h2>Sporting Anthems and Stadium Chants</h2>
+    </div>
+    <p class="prose">Alongside regional national anthems, the United Kingdom boasts an immensely rich culture of crowd-led terrace chants and popular sporting anthems that echo across football and rugby stadiums, serving as powerful markers of sporting pride.</p>
+
+    <!-- England -->
+    <div class="group">
+      <h3>England <small>Rugby &amp; football</small></h3>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Rugby union · Twickenham</span>
+          <h4>Swing Low, Sweet Chariot</h4>
+          <p>The quintessential anthem of the English rugby team at Twickenham. Originally a 19th-century African-American spiritual, it was spontaneously adopted by spectators in 1988 to support the Black English winger Chris Oti during a hat-trick performance. It remains a massive fan favourite.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=GRMBMT_Ob7s" target="_blank" rel="noopener" aria-label="Watch on YouTube: Swing Low, Sweet Chariot"><img src="https://i.ytimg.com/vi/GRMBMT_Ob7s/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Swing Low, Sweet Chariot</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span><em>Swing Low, Sweet Chariot</em></span><a href="https://www.youtube.com/watch?v=GRMBMT_Ob7s" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Football · Euro 96</span>
+          <h4>Three Lions (It's Coming Home)</h4>
+          <p>Composed for Euro 96 by comedians David Baddiel and Frank Skinner alongside the alternative rock band The Lightning Seeds, it stands as the ultimate anthem of English football fans. The iconic line “It's coming home” frames the historic yearning and self-deprecating optimism of England fans waiting for a major trophy since 1966.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=RJqimlFcJsM" target="_blank" rel="noopener" aria-label="Watch on YouTube: Three Lions"><img src="https://i.ytimg.com/vi/RJqimlFcJsM/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Three Lions</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span><em>Three Lions</em></span><a href="https://www.youtube.com/watch?v=RJqimlFcJsM" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Football · The Lionesses</span>
+          <h4>Sweet Caroline</h4>
+          <p>Neil Diamond's 1969 hit was adopted extensively by fans and by the national women's team (the Lionesses) during their Euro 2022 victory.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=1rGqaMkoiyg" target="_blank" rel="noopener" aria-label="Watch on YouTube: Sweet Caroline"><img src="https://i.ytimg.com/vi/1rGqaMkoiyg/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Sweet Caroline</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span><em>Sweet Caroline</em></span><a href="https://www.youtube.com/watch?v=1rGqaMkoiyg" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Football · Italia 90</span>
+          <h4>World in Motion</h4>
+          <p>Created by the rock group New Order for the 1990 World Cup, it remains legendary for its electronic rhythm and the famous rap verse delivered by the player John Barnes.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=Re4aDJL3heA" target="_blank" rel="noopener" aria-label="Watch on YouTube: World in Motion"><img src="https://i.ytimg.com/vi/Re4aDJL3heA/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">World in Motion</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span><em>World in Motion</em></span><a href="https://www.youtube.com/watch?v=Re4aDJL3heA" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scotland -->
+    <div class="group">
+      <h3>Scotland <small>Murrayfield &amp; Hampden</small></h3>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Celebration</span>
+          <h4>500 Miles</h4>
+          <p>The classic track by the Scottish folk-rock band The Proclaimers serves as the ultimate post-victory celebration anthem, blasted across Murrayfield or football stadiums following a crucial Scottish goal or win.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=tbNlMtqrYS0" target="_blank" rel="noopener" aria-label="Watch on YouTube: 500 Miles"><img src="https://i.ytimg.com/vi/tbNlMtqrYS0/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">500 Miles</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span><em>(I'm Gonna Be) 500 Miles</em></span><a href="https://www.youtube.com/watch?v=tbNlMtqrYS0" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Full time</span>
+          <h4>Loch Lomond</h4>
+          <p>Commonly performed at the conclusion of national football matches, this traditional folk song is chanted in a high-energy rock rendition popularised by the band Runrig, prompting mass stadium solidarity with fans linking arms.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=KpG9bjZl3S0" target="_blank" rel="noopener" aria-label="Watch on YouTube: Loch Lomond"><img src="https://i.ytimg.com/vi/KpG9bjZl3S0/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Loch Lomond</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span><em>Loch Lomond</em></span><a href="https://www.youtube.com/watch?v=KpG9bjZl3S0" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wales -->
+    <div class="group">
+      <h3>Wales <small>Principality Stadium</small></h3>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Rugby · Unofficial</span>
+          <h4>Delilah</h4>
+          <p>Tom Jones's iconic 1968 pop hit became the legendary unofficial anthem for Welsh rugby fans inside Cardiff's Principality Stadium. Although the Welsh Rugby Union banned the song from stadium loudspeakers and official choirs in 2023 because of the domestic-violence themes in its lyrics, fans continue to sing it passionately a cappella from the stands.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=jlho6cy3ZdQ" target="_blank" rel="noopener" aria-label="Watch on YouTube: Delilah sung in the stadium in Cardiff"><img src="https://i.ytimg.com/vi/jlho6cy3ZdQ/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Delilah sung in the stadium in Cardiff</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span><em>Delilah</em> in the stadium, Cardiff</span><a href="https://www.youtube.com/watch?v=jlho6cy3ZdQ" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Rugby · Hymn</span>
+          <h4>Bread of Heaven (Cwm Rhondda)</h4>
+          <p>A traditional Welsh hymn regularly sung in booming choral harmony by rugby crowds, showcasing the nation's historic musical heritage.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=m0JDYOA4Ofg" target="_blank" rel="noopener" aria-label="Watch on YouTube: Bread of Heaven sung by Welsh rugby fans"><img src="https://i.ytimg.com/vi/m0JDYOA4Ofg/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Bread of Heaven sung by Welsh rugby fans</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span>Welsh fans before a Six Nations match</span><a href="https://www.youtube.com/watch?v=m0JDYOA4Ofg" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ireland -->
+    <div class="group">
+      <h3>Ireland <small>Unified rugby union team</small></h3>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Rugby · All-island</span>
+          <h4>The Fields of Athenry</h4>
+          <p>Although a sombre folk ballad set during the 19th-century Irish famine, it has been embraced as a spine-tingling anthem by rugby supporters across the entire island of Ireland, sung slowly in massive stadium choruses.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=s6gERRLm3_c" target="_blank" rel="noopener" aria-label="Watch on YouTube: The Fields of Athenry sung by Irish rugby fans"><img src="https://i.ytimg.com/vi/s6gERRLm3_c/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">The Fields of Athenry sung by Irish rugby fans</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span>Irish rugby fans</span><a href="https://www.youtube.com/watch?v=s6gERRLm3_c" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clubs -->
+    <div class="group">
+      <h3>Club anthems <small>Domestic football</small></h3>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Liverpool FC &amp; Celtic FC</span>
+          <h4>You'll Never Walk Alone</h4>
+          <p>Originally from a US musical (Rodgers and Hammerstein's <em>Carousel</em>, 1945), covered by the Liverpool group Gerry and the Pacemakers in 1963, it is widely regarded as the most emotionally moving club anthem in world football.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=Y9BRp_6OoOI" target="_blank" rel="noopener" aria-label="Watch on YouTube: You'll Never Walk Alone at Anfield"><img src="https://i.ytimg.com/vi/Y9BRp_6OoOI/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">You'll Never Walk Alone at Anfield</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span>The Kop at Anfield</span><a href="https://www.youtube.com/watch?v=Y9BRp_6OoOI" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=5tq-RwwKldA" target="_blank" rel="noopener" aria-label="Watch on YouTube: Gerry Marsden sings You'll Never Walk Alone at Anfield"><img src="https://i.ytimg.com/vi/5tq-RwwKldA/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Gerry Marsden sings You'll Never Walk Alone at Anfield</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span>Gerry Marsden, live at Anfield</span><a href="https://www.youtube.com/watch?v=5tq-RwwKldA" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">Manchester City</span>
+          <h4>Blue Moon</h4>
+          <p>A melancholic American ballad adopted by City supporters in the late 1980s to defiantly mark the lean decades before their modern era of dominance.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=AhHAOa_qEsA" target="_blank" rel="noopener" aria-label="Watch on YouTube: Blue Moon sung by Manchester City fans"><img src="https://i.ytimg.com/vi/AhHAOa_qEsA/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">Blue Moon sung by Manchester City fans</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span>City fans at the Etihad</span><a href="https://www.youtube.com/watch?v=AhHAOa_qEsA" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+      <div class="song">
+        <div class="txt">
+          <span class="ctx">West Ham United</span>
+          <h4>I'm Forever Blowing Bubbles</h4>
+          <p>Sung since the 1920s, this historic piece is performed while thousands of real soap bubbles are released into the stadium air.</p>
+        </div>
+        <div class="media">
+          <div class="video"><div class="vframe"><a class="vbtn" href="https://www.youtube.com/watch?v=Yzw6x9ot7MA" target="_blank" rel="noopener" aria-label="Watch on YouTube: I'm Forever Blowing Bubbles at the London Stadium"><img src="https://i.ytimg.com/vi/Yzw6x9ot7MA/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="vtitle">I'm Forever Blowing Bubbles at the London Stadium</span><span class="play" aria-hidden="true"></span><span class="yt">Watch on YouTube ↗</span></a></div><div class="vcap"><span>West Ham fans at the London Stadium</span><a href="https://www.youtube.com/watch?v=Yzw6x9ot7MA" target="_blank" rel="noopener">YouTube ↗</a></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quiz-cta" id="test-yourself">
+  <div class="wrap">
+    <div class="inner">
+      <div class="stack">
+        <p class="label">Final part</p>
+        <h2>Test yourself</h2>
+        <p>Fifteen questions on everything above. Your name, email address and score are sent to your teacher when you finish.</p>
+      </div>
+      <a class="btn" href="#quiz" id="open-quiz">Take the quiz →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="quiz-app" hidden role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+  <div class="qbar"><div class="in">
+    <button class="back" type="button" id="quiz-back">← Back to the page</button>
+    <span class="label">Quiz · 15 questions</span>
+  </div></div>
+  <div class="qmain">
+    <div class="stack">
+      <h2 class="qtitle" id="quiz-title">Hope, Glory <em>&amp; the Terraces</em></h2>
+      <p class="muted">Pick an answer to see whether you were right and why.</p>
+    </div>
+
+    <div class="card" id="q-start">
+      <h2>Before you start</h2>
+      <div class="field"><label for="q-name">Full name</label><input id="q-name" autocomplete="name"></div>
+      <div class="field"><label for="q-email">Email address</label><input id="q-email" type="email" autocomplete="email" inputmode="email"></div>
+      <p class="note">Once you start, going back to the page erases your answers and your score is not sent. Finish all 15 questions first.</p>
+      <p class="err" id="q-err" role="alert"></p>
+      <div class="actions"><button class="btn dark" type="button" id="q-go">Start the quiz</button></div>
+    </div>
+
+    <div id="q-run" hidden>
+      <div class="progress" style="margin-bottom:1rem"><span id="q-count">Question 1 of 15</span><div class="track" aria-hidden="true"><div class="fill" id="q-fill"></div></div><span id="q-tally">0 correct</span></div>
+      <section class="card" id="q-card" aria-live="polite"></section>
+    </div>
+
+    <section class="card" id="q-result" hidden></section>
+
+    <section class="card warn" id="q-leave" hidden role="alertdialog" aria-labelledby="q-leave-title">
+      <h2 id="q-leave-title">Leave the quiz?</h2>
+      <p id="q-leave-text">If you go back to the page now, your answers will be erased and your score will not be sent to your teacher.</p>
+      <div class="actions"><button class="btn ghost" type="button" id="q-leave-yes">Erase my answers and go back</button><button class="btn dark" type="button" id="q-leave-no">Stay in the quiz</button></div>
+    </section>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Photographs marked “Wikimedia Commons” are used under their free licences (follow each caption link for author and licence); other photographs were supplied for teaching use. Videos open on YouTube.</p>  </div>
+</footer>
+
+<script>
+(function(){
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyaEgsnHvSRJ_Ud8Sdh8yIfROVke93FbGLv4E5_RcZ_9JmK4HBbUxaliDajY6AV2RY/exec";
+var QUESTIONS = [
+  { part:"Part I · The Proms", q:"What is the official name of the BBC Proms?",
+    options:["The Royal Albert Hall Summer Season","The Queen's Hall Festival of Music","The BBC Radio 3 Classical Proms","The Henry Wood Promenade Concerts"],
+    a:3, why:"The festival is named after its founding conductor, Sir Henry Wood." },
+  { part:"Part I · The Proms", q:"In which year was the festival founded, and with what aim?",
+    options:["1851, to celebrate the Great Exhibition", "1941, to raise morale during the Blitz", "1954, to give the BBC a summer broadcasting season", "1895, to make classical music accessible to a wider, general audience"],
+    a:3, why:"Robert Newman and Sir Henry Wood founded it in 1895 to open classical music to a wider, general audience." },
+  { part:"Part I · The Proms", q:"Where does the word “prom” come from?",
+    options:["From “promenade concert”, where the audience could walk around or stand","From “promise”, the pledge to keep tickets cheap","From “promotion”, the BBC's advertising of the season","From “Prometheus”, the name of the first hall"],
+    a:0, why:"In a promenade concert the audience could walk around or stand. Today cheap standing tickets let Promenaders stand in the Arena or the Gallery." },
+  { part:"Part II · The Last Night", q:"Why did Henry Wood compose the Fantasia on British Sea Songs in 1905?",
+    options:["To mark the centenary of the Battle of Trafalgar","To celebrate the coronation of Edward VII","To open the new Royal Albert Hall","To honour the Royal Navy after the Battle of Jutland"],
+    a:0, why:"The suite of maritime melodies marked the centenary of Trafalgar (1805) and became a Last Night tradition." },
+  { part:"Part II · The Last Night", q:"Why did the Proms move to the Royal Albert Hall in 1941?",
+    options:["The BBC bought the Royal Albert Hall","Audiences had outgrown the old venue","The Queen's Hall was destroyed by German bombing","Henry Wood quarrelled with the owners of the Queen's Hall"],
+    a:2, why:"The festival's original home, the Queen's Hall, was destroyed in an air raid in May 1941, forcing an emergency move." },
+  { part:"Part II · The Last Night", q:"Which of these is NOT part of the traditional second half of the Last Night?",
+    options:["Jerusalem","Rule, Britannia!","Pomp and Circumstance March No. 1","Flower of Scotland"],
+    a:3, why:"Flower of Scotland is Scotland's de facto anthem at sporting events. The Last Night sequence is Pomp and Circumstance, the Fantasia, Rule, Britannia!, Jerusalem and God Save the King." },
+  { part:"Part II · The Last Night", q:"What do the Promenaders do during the Sailor's Hornpipe?",
+    options:["They sit down in silence","They jump up and down in rhythm, faster and faster as the music speeds up","They wave scarves above their heads","They sing the melody without the orchestra"],
+    a:1, why:"The standing audience bobs up and down in synchronised rhythm, accelerating as the orchestra builds to its climax." },
+  { part:"Part II · The Last Night", q:"What happened at the Last Night of the Proms in 2013?",
+    options:["It was broadcast live for the first time","Proms in the Park was launched","It moved back to the Queen's Hall","Marin Alsop became the first woman to conduct it"],
+    a:3, why:"The American conductor Marin Alsop was the first woman ever to conduct the Last Night." },
+  { part:"Part III · The anthems", q:"On what is the status of God Save the King as national anthem based?",
+    options:["An Act of Parliament passed in 1745","A decision of the Supreme Court","A referendum held in the four nations","Royal custom and tradition, not statute law"],
+    a:3, why:"It is the official anthem of the whole United Kingdom by historical royal custom; no law makes it so." },
+  { part:"Part III · The anthems", q:"Why was the Sex Pistols' “God Save the Queen” (1977) so provocative?",
+    options:["It was released for the Silver Jubilee and turned the anthem's title against the monarchy","It was the first punk song played at the Last Night of the Proms","It replaced the anthem at football matches","It was written by a member of the Royal Family"],
+    a:0, why:"Timed for the Silver Jubilee, it attacked the monarchy under the anthem's own title. The BBC banned it, yet it reached number two." },
+  { part:"Part III · The anthems", q:"Which anthem does England use at the Commonwealth Games?",
+    options:["God Save the King", "Land of Hope and Glory", "Three Lions", "Jerusalem"],
+    a:3, why:"Jerusalem, Blake's poem set by Parry, replaced Land of Hope and Glory as England's Commonwealth Games anthem. God Save the King is used at football and rugby." },
+  { part:"Part III · The anthems", q:"Which statement about the Welsh anthem, Hen Wlad Fy Nhadau, is true?",
+    options:["It was made official by an Act of the UK Parliament","It is sung in English at sporting fixtures","It has no statute behind it but is recognised by the Welsh Government and sung in Welsh","It is only sung at rugby matches"],
+    a:2, why:"Its status is semi-official: recognised by the Welsh Government and Senedd, performed at state events, and sung entirely in Welsh." },
+  { part:"Part III · The anthems", q:"Why does Northern Ireland have no single anthem everyone accepts?",
+    options:["Because the Northern Ireland Assembly has never met","Because of deep political and communal divisions, so the anthem depends on the sporting body","Because it shares the Welsh anthem","Because anthems are banned at sporting events there"],
+    a:1, why:"Usage varies: God Save the King for the football team, the Londonderry Air at the Commonwealth Games, Ireland's Call for all-island teams such as rugby." },
+  { part:"Part IV · The terraces", q:"Why was Swing Low, Sweet Chariot first sung at Twickenham in 1988?",
+    options:["To celebrate England winning the World Cup","It was the official song of the Rugby Football Union","Spectators sang it to support the Black English winger Chris Oti during a hat-trick","It was played by the band at half-time"],
+    a:2, why:"The 19th-century African-American spiritual was taken up spontaneously by fans cheering Chris Oti." },
+  { part:"Part IV · The terraces", q:"What did the Welsh Rugby Union decide about Delilah in 2023?",
+    options:["To make it Wales's official anthem","To ban it from stadium loudspeakers and official choirs because of its domestic-violence themes","To ask Tom Jones to record a new version","To have it sung only in Welsh"],
+    a:1, why:"The song tells of a man killing his lover; the WRU withdrew it from official use, but fans still sing it from the stands." }
+];
+
+var KEYS = ['A','B','C','D'];
+var app = document.getElementById('quiz-app');
+var $ = function(id){ return document.getElementById(id); };
+var st = { i:0, score:0, answers:[], name:'', email:'', attempt:0, phase:'start' }; // phase: start | run | done
+var lastFocus = null, ignorePop = false;
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function show(id){ ['q-start','q-run','q-result','q-leave'].forEach(function(x){ $(x).hidden = (x !== id); }); app.scrollTop = 0; }
+
+/* ---------- opening and closing ---------- */
+function openQuiz(push){
+  lastFocus = document.activeElement;
+  app.hidden = false; document.body.classList.add('quiz-open');
+  if (push) { try { history.pushState({ quiz:true }, '', '#quiz'); } catch(e){} }
+  show(st.phase === 'run' ? 'q-run' : st.phase === 'done' ? 'q-result' : 'q-start');
+  if (st.phase === 'start') $('q-name').focus();
+}
+function closeQuiz(){
+  resetAnswers();
+  app.hidden = true; document.body.classList.remove('quiz-open');
+  try { if (history.state && history.state.quiz) { ignorePop = true; history.back(); } } catch(e){}
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+function resetAnswers(){ st.i = 0; st.score = 0; st.answers = []; st.phase = 'start'; }
+function askLeave(){
+  if (st.phase === 'start') { closeQuiz(); return; }
+  $('q-leave-text').textContent = st.phase === 'run'
+    ? 'If you go back to the page now, your answers will be erased and your score will not be sent to your teacher.'
+    : 'Your score has already been sent. Going back will clear your results from this screen.';
+  show('q-leave'); $('q-leave-no').focus();
+}
+
+$('open-quiz').addEventListener('click', function(e){ e.preventDefault(); openQuiz(true); });
+$('quiz-back').addEventListener('click', askLeave);
+$('q-leave-yes').addEventListener('click', closeQuiz);
+$('q-leave-no').addEventListener('click', function(){ show(st.phase === 'run' ? 'q-run' : 'q-result'); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !app.hidden) askLeave(); });
+
+// The browser's own Back button: keep the student in the quiz and warn them instead.
+window.addEventListener('popstate', function(){
+  if (ignorePop) { ignorePop = false; return; }
+  if (app.hidden) { if (location.hash === '#quiz') openQuiz(false); return; }
+  if (st.phase === 'start') { resetAnswers(); app.hidden = true; document.body.classList.remove('quiz-open'); return; }
+  try { history.pushState({ quiz:true }, '', '#quiz'); } catch(e){}
+  askLeave();
+});
+// Closing or reloading the tab mid-quiz.
+window.addEventListener('beforeunload', function(e){ if (!app.hidden && st.phase === 'run') { e.preventDefault(); e.returnValue = ''; } });
+if (location.hash === '#quiz') openQuiz(false);
+
+/* ---------- start ---------- */
+function begin(){
+  var n = $('q-name').value.trim(), m = $('q-email').value.trim(), err = $('q-err');
+  if (n.length < 2) { err.textContent = 'Please enter your full name.'; $('q-name').focus(); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { err.textContent = 'Please enter a valid email address, for example name@example.com.'; $('q-email').focus(); return; }
+  err.textContent = ''; st.name = n; st.email = m;
+  resetAnswers(); st.phase = 'run';
+  show('q-run'); render();
+}
+$('q-go').addEventListener('click', begin);
+['q-name','q-email'].forEach(function(id){ $(id).addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); begin(); } }); });
+
+/* ---------- questions ---------- */
+function render(){
+  var Q = QUESTIONS[st.i], card = $('q-card');
+  $('q-count').textContent = 'Question ' + (st.i+1) + ' of ' + QUESTIONS.length;
+  $('q-tally').textContent = st.score + ' correct';
+  $('q-fill').style.width = (st.i / QUESTIONS.length * 100) + '%';
+  card.innerHTML =
+    '<div class="qhead"><span class="qno">' + (st.i+1) + '</span><span class="label">' + esc(Q.part) + '</span></div>' +
+    '<h2>' + esc(Q.q) + '</h2>' +
+    '<ul class="options">' + Q.options.map(function(o,k){
+      return '<li><button class="opt" type="button" data-k="' + k + '"><span class="key">' + KEYS[k] + '</span><span>' + esc(o) + '</span></button></li>';
+    }).join('') + '</ul>' +
+    '<div id="q-fb"></div>' +
+    '<div class="actions"><button class="btn dark" type="button" id="q-next" disabled>' + (st.i === QUESTIONS.length-1 ? 'See my score' : 'Next question') + '</button></div>';
+  card.querySelectorAll('.opt').forEach(function(b){ b.addEventListener('click', choose); });
+  $('q-next').addEventListener('click', next);
+  app.scrollTop = 0;
+}
+function choose(e){
+  var Q = QUESTIONS[st.i], k = +e.currentTarget.getAttribute('data-k'), ok = k === Q.a;
+  if (ok) st.score++;
+  st.answers.push({ k:k, ok:ok });
+  $('q-card').querySelectorAll('.opt').forEach(function(b){
+    var j = +b.getAttribute('data-k'); b.disabled = true;
+    b.classList.add(j === Q.a ? 'correct' : j === k ? 'wrong' : 'dim');
+  });
+  var fb = $('q-fb');
+  fb.className = 'feedback' + (ok ? '' : ' bad');
+  fb.innerHTML = '<b>' + (ok ? 'Correct.' : 'Not quite. The answer is ' + KEYS[Q.a] + '.') + '</b><p>' + esc(Q.why) + '</p>';
+  $('q-tally').textContent = st.score + ' correct';
+  var n = $('q-next'); n.disabled = false; n.focus();
+}
+function next(){
+  st.i++;
+  if (st.i < QUESTIONS.length) { render(); return; }
+  finish();
+}
+
+/* ---------- result + sending ---------- */
+function finish(){
+  st.phase = 'done'; st.attempt++; $('q-fill').style.width = '100%';
+  var s = st.score, T = QUESTIONS.length;
+  var verdict = s >= 13 ? 'Excellent: you could conduct the Last Night yourself.'
+              : s >= 10 ? 'Well done: a solid grasp of the material.'
+              : s >= 6  ? 'A fair start: reread the parts you missed below.'
+              : 'Time to go back to the page and try again.';
+  $('q-result').innerHTML =
+    '<p class="label">Your score</p>' +
+    '<div class="score">' + s + '<small> / ' + T + '</small></div>' +
+    '<p class="who">' + esc(st.name) + ' · ' + esc(st.email) + '</p>' +
+    '<p>' + verdict + '</p>' +
+    '<p class="status" id="q-status"></p>' +
+    '<ul class="review">' + QUESTIONS.map(function(Q,j){
+      var A = st.answers[j];
+      return '<li><span class="mark ' + (A.ok ? 'ok' : 'no') + '">' + (A.ok ? '✓' : '✗') + '</span><div><div>' + esc(Q.q) + '</div>' +
+        (A.ok ? '' : '<div class="ans">Your answer: ' + esc(Q.options[A.k]) + '</div>') +
+        '<div class="ans">Correct answer: ' + esc(Q.options[Q.a]) + '</div></div></li>';
+    }).join('') + '</ul>' +
+    '<div class="actions"><button class="btn ghost" type="button" id="q-retry" hidden>Send again</button><button class="btn dark" type="button" id="q-again">Try again</button></div>';
+  $('q-again').addEventListener('click', function(){ resetAnswers(); st.phase = 'run'; show('q-run'); render(); });
+  $('q-retry').addEventListener('click', sendScore);
+  show('q-result');
+  sendScore();
+}
+function sendScore(){
+  var el = $('q-status'), retry = $('q-retry');
+  el.className = 'status'; el.textContent = 'Sending your score to your teacher…'; retry.hidden = true;
+  var payload = {
+    name: st.name, email: st.email, score: st.score, total: QUESTIONS.length, attempt: st.attempt,
+    answers: st.answers.map(function(A,j){ return 'Q' + (j+1) + ':' + KEYS[A.k] + (A.ok ? '✓' : '✗'); }).join(' ')
+  };
+  try {
+    fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
+      .then(function(){ el.className = 'status ok'; el.textContent = 'Score sent. Your teacher has received it.'; })
+      .catch(fail);
+  } catch(e){ fail(); }
+  function fail(){ el.className = 'status bad'; el.textContent = 'Your score could not be sent. Check your internet connection and try again.'; retry.hidden = false; }
+}
+})();
+</script>
+</body>
+</html>
